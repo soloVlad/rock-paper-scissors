@@ -45,10 +45,41 @@ function playRound(playerSelection, computerSelection) {
   return result;
 }
 
-const playerSelection = "Paper";
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
+function getPlayerTurn() {
+  let playerTurn = prompt("Your turn: ");
+  return playerTurn;
+}
 
-// for (let i = 0; i < 10; i++) {
-//   console.log(computerPlay());
-// }
+function findWinner(playerScore, computerScore) {
+  if (playerScore > computerScore) return "You win the battle!";
+  else if (playerScore < computerScore) return "Computer wins the battle!";
+  return "Draw!";
+}
+
+function announceWinner(finalResult) {
+  console.log(finalResult);
+}
+
+function game(roundsNumber = 5) {
+  let computerSelection = "";
+  let playerSelection = "";
+  let roundResult = "";
+  let computerScore = 0;
+  let playerScore = 0;
+
+  for (let i = 1; i <= roundsNumber; i++) {
+    computerSelection = computerPlay();
+    playerSelection = getPlayerTurn();
+
+    roundResult = playRound(playerSelection, computerSelection);
+    console.log(roundResult);
+
+    if (roundResult.includes("won")) playerScore++;
+    else computerScore++;
+  }
+
+  let finalResult = findWinner(playerScore, computerScore);
+  announceWinner(finalResult);
+}
+
+game();
