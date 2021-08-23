@@ -6,6 +6,7 @@
 
 body {
   background-color: #370617;
+  position: relative;
 }
 
 .main {
@@ -58,6 +59,11 @@ body {
 .game-option:hover {
   box-shadow: 0 0 4px 4px #ccd5ae;
   cursor: pointer;
+  transform: scale(1.1);
+}
+
+.game-option:active {
+  box-shadow: 0 0 4px 4px #f8e00a;
 }
 
 .game-option > img {
@@ -70,4 +76,48 @@ body {
   color: #b9bbb2;
   font-size: 28px;
   text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(5, 5, 5, 0.9);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  margin: 15% auto;
+  font-size: 36px;
+  padding: 150px 20px 150px 20px;
+  border: 1px solid #888;
+  width: 850px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  transform: scale(1.5);
+  color: #fff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: all ease 0.07s;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(114, 22, 22);
+  text-decoration: none;
+  cursor: pointer;
 }

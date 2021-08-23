@@ -3,6 +3,10 @@ const amountOfRounds = 5;
 const roundResultContainer = document.querySelector(".round-result-container");
 const userScoreContainer = document.querySelector("#user-score");
 const computerScoreContainer = document.querySelector("#computer-score");
+const modalText = document.querySelector(".modal-text");
+const modal = document.querySelector("#myModal");
+const buttons = Array.from(document.querySelectorAll("button"));
+const closeModal = document.querySelector(".close");
 
 let userScore = 0;
 let computerScore = 0;
@@ -13,20 +17,12 @@ function getRandomIndex() {
 
 function computerPlay() {
   let randomIndex = getRandomIndex();
-  let ans = playOptions[randomIndex];
-  console.log(ans);
-  return ans;
-  // return playOptions[randomIndex];
+  return playOptions[randomIndex];
 }
 
 function getCapitalizedWord(word) {
-  return word[0].toUpperCase() + word.slice(1);
-}
-
-function getProcessedInput(word) {
   let lowerCasedWord = word.toLowerCase();
-  let capitalizedWord = getCapitalizedWord(lowerCasedWord);
-  return capitalizedWord;
+  return lowerCasedWord[0].toUpperCase() + lowerCasedWord.slice(1);
 }
 
 function printRoundResult(result) {
@@ -40,7 +36,7 @@ function updateDisplayedScore() {
 }
 
 function playRound(userSelection, computerSelection) {
-  userSelection = getProcessedInput(userSelection);
+  userSelection = getCapitalizedWord(userSelection);
   let resultMessage = "";
 
   switch (userSelection) {
@@ -83,15 +79,21 @@ function playRound(userSelection, computerSelection) {
 
   printRoundResult(resultMessage);
 
-  if (userScore === 5) announceWinner("user");
-  if (computerScore === 5) announceWinner("computer");
+  if (userScore === amountOfRounds) announceWinner("user");
+  if (computerScore === amountOfRounds) announceWinner("computer");
 }
 
 function announceWinner(winner) {
-  console.log(`Congratulations ${winner}`);
+  modal.style.display = "block";
+  modalText.innerHTML = `Congratulations ${winner}!<br>Score -> ${userScore}:${computerScore}`;
+  clearScore();
 }
 
-const buttons = Array.from(document.querySelectorAll("button"));
+function clearScore() {
+  userScore = 0;
+  computerScore = 0;
+  updateDisplayedScore();
+}
 
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
@@ -100,3 +102,5 @@ buttons.forEach((button) =>
     playRound(userSelection, computerSelection);
   })
 );
+
+closeModal.addEventListener("click", () => (modal.style.display = "none"));
