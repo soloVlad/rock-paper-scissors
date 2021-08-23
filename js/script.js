@@ -1,4 +1,11 @@
 const playOptions = ["Rock", "Paper", "Scissors"];
+const amountOfRounds = 5;
+const roundResultContainer = document.querySelector(".round-result-container");
+const userScoreContainer = document.querySelector("#user-score");
+const computerScoreContainer = document.querySelector("#computer-score");
+
+let userScore = 0;
+let computerScore = 0;
 
 function getRandomIndex() {
   return Math.floor(Math.random() * 3);
@@ -6,7 +13,10 @@ function getRandomIndex() {
 
 function computerPlay() {
   let randomIndex = getRandomIndex();
-  return playOptions[randomIndex];
+  let ans = playOptions[randomIndex];
+  console.log(ans);
+  return ans;
+  // return playOptions[randomIndex];
 }
 
 function getCapitalizedWord(word) {
@@ -19,67 +29,74 @@ function getProcessedInput(word) {
   return capitalizedWord;
 }
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = getProcessedInput(playerSelection);
-  let result = "";
+function printRoundResult(result) {
+  roundResultContainer.textContent = result;
+  updateDisplayedScore();
+}
 
-  switch (playerSelection) {
+function updateDisplayedScore() {
+  userScoreContainer.textContent = userScore;
+  computerScoreContainer.textContent = computerScore;
+}
+
+function playRound(userSelection, computerSelection) {
+  userSelection = getProcessedInput(userSelection);
+  let resultMessage = "";
+
+  switch (userSelection) {
     case "Rock":
-      if (computerSelection === "Paper") result = "You lose! Paper beats Rock";
-      else result = "You won! Rock beats Scissors";
+      if (computerSelection === "Paper") {
+        resultMessage = "You lose! Paper beats Rock";
+        computerScore++;
+      } else if (computerSelection == "Scissors") {
+        resultMessage = "You won! Rock beats Scissors";
+        userScore++;
+      } else {
+        resultMessage = "Draw! Computer chose Rock too";
+      }
       break;
 
     case "Paper":
-      if (computerSelection === "Scissors")
-        result = "You lose! Scissors beats Paper";
-      else result = "You won! Paper beats Rock";
+      if (computerSelection === "Scissors") {
+        resultMessage = "You lose! Scissors beats Paper";
+        computerScore++;
+      } else if (computerSelection === "Rock") {
+        resultMessage = "You won! Paper beats Rock";
+        userScore++;
+      } else {
+        resultMessage = "Draw! Computer chose Rock too";
+      }
       break;
 
     case "Scissors":
-      if (computerSelection === "Rock")
-        result = "You lose! Rock beats Scissors";
-      else result = "You won! Scissors beats Paper";
+      if (computerSelection === "Rock") {
+        resultMessage = "You lose! Rock beats Scissors";
+        computerScore++;
+      } else if (computerSelection === "Paper") {
+        resultMessage = "You won! Scissors beats Paper";
+        userScore++;
+      } else {
+        resultMessage = "Draw! Computer chose Paper too";
+      }
       break;
   }
 
-  return result;
+  printRoundResult(resultMessage);
+
+  if (userScore === 5) announceWinner("user");
+  if (computerScore === 5) announceWinner("computer");
 }
 
-function getPlayerTurn() {
-  let playerTurn = prompt("Your turn: ");
-  return playerTurn;
+function announceWinner(winner) {
+  console.log(`Congratulations ${winner}`);
 }
 
-function findWinner(playerScore, computerScore) {
-  if (playerScore > computerScore) return "You win the battle!";
-  else if (playerScore < computerScore) return "Computer wins the battle!";
-  return "Draw!";
-}
+const buttons = Array.from(document.querySelectorAll("button"));
 
-function announceWinner(finalResult) {
-  console.log(finalResult);
-}
-
-function game(roundsNumber = 5) {
-  let computerSelection = "";
-  let playerSelection = "";
-  let roundResult = "";
-  let computerScore = 0;
-  let playerScore = 0;
-
-  for (let i = 1; i <= roundsNumber; i++) {
-    computerSelection = computerPlay();
-    playerSelection = getPlayerTurn();
-
-    roundResult = playRound(playerSelection, computerSelection);
-    console.log(roundResult);
-
-    if (roundResult.includes("won")) playerScore++;
-    else computerScore++;
-  }
-
-  let finalResult = findWinner(playerScore, computerScore);
-  announceWinner(finalResult);
-}
-
-// game();
+buttons.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    let userSelection = e.target.id;
+    let computerSelection = computerPlay();
+    playRound(userSelection, computerSelection);
+  })
+);

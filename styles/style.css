@@ -62,4 +62,12 @@ body {
 
 .game-option > img {
   width: 200px;
+  pointer-events: none;
+}
+
+.round-result-container {
+  margin-top: 75px;
+  color: #b9bbb2;
+  font-size: 28px;
+  text-align: center;
 }
