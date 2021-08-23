@@ -4,27 +4,56 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #370617;
+}
+
 .main {
   margin: 0 auto;
+  padding-top: 75px;
+  font-size: 35px;
   width: 80%;
 }
 
 .game-name {
+  color: #b9bbb2;
   text-align: center;
 }
 
 .game-container {
+  margin-top: 75px;
   display: flex;
   justify-content: center;
 }
 
 .player-score {
+  margin-top: 15px;
   text-align: center;
+  color: #76c893;
+  font-size: 54px;
 }
 
 .player-avatar {
+  border-radius: 10px;
+  box-shadow: 0 0 1px 1px #b9bbb2;
   width: 300px;
 }
 
+.game-buttons {
+  margin: 150px 50px 0 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 25px;
+}
+
 .game-option {
+  padding: 50px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 1px 1px #ccd5ae;
+  background-color: #03071e;
+}
+
+.game-option > img {
+  width: 200px;
 }
