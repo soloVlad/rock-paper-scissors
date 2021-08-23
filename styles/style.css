@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.game-name {
+  text-align: center;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+}
+
+.player-score {
+  text-align: center;
+}
+
+.player-avatar {
+  width: 300px;
+}
+
+.game-option {
+}

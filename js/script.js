@@ -82,4 +82,4 @@ function game(roundsNumber = 5) {
   announceWinner(finalResult);
 }
 
-game();
+// game();
