@@ -60,7 +60,7 @@ function playRound(userSelection, computerSelection) {
         resultMessage = "You won! Paper beats Rock";
         userScore++;
       } else {
-        resultMessage = "Draw! Computer chose Rock too";
+        resultMessage = "Draw! Computer chose Paper too";
       }
       break;
 
@@ -72,7 +72,7 @@ function playRound(userSelection, computerSelection) {
         resultMessage = "You won! Scissors beats Paper";
         userScore++;
       } else {
-        resultMessage = "Draw! Computer chose Paper too";
+        resultMessage = "Draw! Computer chose Scissors too";
       }
       break;
   }
