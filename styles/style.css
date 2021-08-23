@@ -52,6 +52,12 @@ body {
   border: none;
   box-shadow: 0 0 1px 1px #ccd5ae;
   background-color: #03071e;
+  transition: all ease 0.07s;
+}
+
+.game-option:hover {
+  box-shadow: 0 0 4px 4px #ccd5ae;
+  cursor: pointer;
 }
 
 .game-option > img {
