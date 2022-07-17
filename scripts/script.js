@@ -15,13 +15,6 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function playRound(playerChoice, computerChoice) {
-    let roundResult = determineRoundResult(playerChoice, computerChoice);
-    let roundResultMessage = getRoundResultMessage(playerChoice, computerChoice, roundResult);
-    return roundResultMessage;
-    
-}
-
 function determineRoundResult(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) return ROUND_RESULTS[1];
 
@@ -50,4 +43,15 @@ function getRoundResultMessage(playerChoice, computerChoice, roundResult) {
         case ROUND_RESULTS[2]:
             return `Draw! Computer chose ${playerChoiceCapitalized} too`;
     }
+}
+
+function getPlayerChoice() {
+    return prompt("Enter your choice (rock, paper or scissors):").toLowerCase();
+}
+
+function playRound(playerChoice, computerChoice) {
+    let roundResult = determineRoundResult(playerChoice, computerChoice);
+    let roundResultMessage = getRoundResultMessage(playerChoice, computerChoice, roundResult);
+    return roundResultMessage;
+    
 }
